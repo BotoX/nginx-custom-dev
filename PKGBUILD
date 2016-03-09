@@ -20,19 +20,20 @@ _headersmore_tag="v0.29"
 _echo_tag="v0.58"
 _upstreamfair_commit="a18b4099fbd458111983200e098b6f0c8efed4bc"
 _authpam_tag="v1.4"
-_pagespeed_version="1.9.32.10"
+_pagespeed_version="1.10.33.6"
 _davext_tag="v0.0.3"
 _naxsi_tag="0.54"
 _substitutions_tag="v0.6.4"
-_lua_tag="v0.10.0"
+_lua_tag="v0.10.1rc1"
+_brotli_commit=""
 
 pkgname=nginx-custom-dev
-pkgver=1.9.10
-pkgrel=1
+pkgver=1.9.12
+pkgrel=2
 pkgdesc="Development version of lightweight HTTP server and IMAP/POP3 proxy server with standard, additional and 3d party modules"
 arch=('i686' 'x86_64')
 
-depends=('pcre' 'zlib' 'openssl' 'pam' 'geoip' 'geoip-database' 'gd' 'libxslt' 'luajit')
+depends=('pcre' 'zlib' 'openssl' 'pam' 'geoip' 'geoip-database' 'gd' 'libxslt' 'luajit' 'libbrotli-git')
 makedepends=('libxslt' 'gd' 'git')
 
 url="http://nginx.org"
@@ -58,7 +59,6 @@ source=("nginx.sh"
     "nginx.service"
     "http://nginx.org/download/nginx-$pkgver.tar.gz"
     "ngx-fancyindex.diff"
-    "ngx_pagespeed.diff"
     "ngx-fancyindex::git+https://github.com/aperezdc/ngx-fancyindex#tag=${_fancyindex_tag}"
     "ngx_cache_purge::git+https://github.com/FRiCKLE/ngx_cache_purge.git#tag=${_cachepurge_tag}"
     "ngx_slowfs_cache::git+https://github.com/FRiCKLE/ngx_slowfs_cache.git#tag=${_slowfscache_tag}"
@@ -74,15 +74,15 @@ source=("nginx.sh"
     "naxsi::git+https://github.com/nbs-system/naxsi#tag=${_naxsi_tag}"
     "ngx_http_substitutions_filter_module::git+https://github.com/yaoweibin/ngx_http_substitutions_filter_module#tag=${_substitutions_tag}"
     "lua-nginx-module::git+https://github.com/chaoslawful/lua-nginx-module#tag=${_lua_tag}"
+    "ngx_brotli::git+https://github.com/google/ngx_brotli#commit=${_brotli_commit}"
 )
 
 md5sums=('d56559ed5e8cc0b1c7adbe33f2300c4c'
          '845cab784b50f1666bbf89d7435ac7af'
          '79031b58828462dec53a9faed9ddb36a'
          '6696dc228a567506bca3096b5197c9db'
-         '64cc970988356a5e0fc4fcd1ab84fe57'
+         '0afe4a7e589a0de43b7b54aa055a4351'
          '47adc600c72cfb59754eff3b7850a6f3'
-         '528a86490f918d0a5d09bc12cda2b365'
          'SKIP'
          'SKIP'
          'SKIP'
@@ -92,7 +92,8 @@ md5sums=('d56559ed5e8cc0b1c7adbe33f2300c4c'
          'SKIP'
          'SKIP'
          'SKIP'
-         'c4069b751887d736f643ba698239c514'
+         '5ce28c4ac6f71e44b78fe654952963c2'
+         'SKIP'
          'SKIP'
          'SKIP'
          'SKIP'
@@ -107,10 +108,6 @@ prepare() {
   cd "$srcdir/ngx-fancyindex"
   git apply --ignore-space-change --ignore-whitespace \
     "$srcdir/ngx-fancyindex.diff"
-
-  cd "$srcdir/ngx_pagespeed"
-  git apply --ignore-space-change --ignore-whitespace \
-    "$srcdir/ngx_pagespeed.diff"
 }
 
 build() {
@@ -172,7 +169,8 @@ build() {
     --add-module="../nginx-rtmp-module" \
     --add-module="../nginx-dav-ext-module" \
     --add-module="../ngx_http_substitutions_filter_module" \
-    --add-module="../lua-nginx-module"
+    --add-module="../lua-nginx-module" \
+    --add-module="../ngx_brotli"
 
   make
 }
