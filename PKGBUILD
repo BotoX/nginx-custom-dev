@@ -20,7 +20,7 @@ _headersmore_tag="v0.29"
 _echo_tag="v0.58"
 _upstreamfair_commit="a18b4099fbd458111983200e098b6f0c8efed4bc"
 _authpam_tag="v1.4"
-_pagespeed_version="1.10.33.6"
+_pagespeed_version="1.11.33.0"
 _davext_tag="v0.0.3"
 _naxsi_tag="0.54"
 _substitutions_tag="v0.6.4"
@@ -28,8 +28,8 @@ _lua_tag="v0.10.1rc1"
 _brotli_commit=""
 
 pkgname=nginx-custom-dev
-pkgver=1.9.12
-pkgrel=2
+pkgver=1.9.14
+pkgrel=1
 pkgdesc="Development version of lightweight HTTP server and IMAP/POP3 proxy server with standard, additional and 3d party modules"
 arch=('i686' 'x86_64')
 
@@ -81,7 +81,7 @@ md5sums=('d56559ed5e8cc0b1c7adbe33f2300c4c'
          '845cab784b50f1666bbf89d7435ac7af'
          '79031b58828462dec53a9faed9ddb36a'
          '6696dc228a567506bca3096b5197c9db'
-         '0afe4a7e589a0de43b7b54aa055a4351'
+         'a25818039f34b5d54b017d44c76321c4'
          '47adc600c72cfb59754eff3b7850a6f3'
          'SKIP'
          'SKIP'
@@ -92,7 +92,7 @@ md5sums=('d56559ed5e8cc0b1c7adbe33f2300c4c'
          'SKIP'
          'SKIP'
          'SKIP'
-         '5ce28c4ac6f71e44b78fe654952963c2'
+         'c503b01cb92f95a5548cf86a2e7415e5'
          'SKIP'
          'SKIP'
          'SKIP'
