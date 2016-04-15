@@ -18,3 +18,4 @@ naxsi/
 ngx_http_substitutions_filter_module/
 lua-nginx-module/
 ngx_brotli/
+nginx-module-vts/

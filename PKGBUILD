@@ -26,10 +26,11 @@ _naxsi_tag="0.54"
 _substitutions_tag="v0.6.4"
 _lua_tag="v0.10.1rc1"
 _brotli_commit=""
+_vts_tag="v0.1.9"
 
 pkgname=nginx-custom-dev
 pkgver=1.9.14
-pkgrel=1
+pkgrel=2
 pkgdesc="Development version of lightweight HTTP server and IMAP/POP3 proxy server with standard, additional and 3d party modules"
 arch=('i686' 'x86_64')
 
@@ -75,6 +76,7 @@ source=("nginx.sh"
     "ngx_http_substitutions_filter_module::git+https://github.com/yaoweibin/ngx_http_substitutions_filter_module#tag=${_substitutions_tag}"
     "lua-nginx-module::git+https://github.com/chaoslawful/lua-nginx-module#tag=${_lua_tag}"
     "ngx_brotli::git+https://github.com/google/ngx_brotli#commit=${_brotli_commit}"
+    "nginx-module-vts::git+https://github.com/vozlt/nginx-module-vts#tag=${_vts_tag}"
 )
 
 md5sums=('d56559ed5e8cc0b1c7adbe33f2300c4c'
@@ -93,6 +95,7 @@ md5sums=('d56559ed5e8cc0b1c7adbe33f2300c4c'
          'SKIP'
          'SKIP'
          'c503b01cb92f95a5548cf86a2e7415e5'
+         'SKIP'
          'SKIP'
          'SKIP'
          'SKIP'
@@ -170,7 +173,8 @@ build() {
     --add-module="../nginx-dav-ext-module" \
     --add-module="../ngx_http_substitutions_filter_module" \
     --add-module="../lua-nginx-module" \
-    --add-module="../ngx_brotli"
+    --add-module="../ngx_brotli" \
+    --add-module="../nginx-module-vts"
 
   make
 }
