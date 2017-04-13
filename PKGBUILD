@@ -12,29 +12,30 @@ _lock_path="/var/lock"
 _log_path="/var/log/${_pkgname}"
 
 ### 3d party modules:
-_fancyindex_tag="v0.3.5"
+_fancyindex_commit=""
 _cachepurge_tag="2.3"
 _slowfscache_tag="1.10"
-_uploadprogress_tag="v0.9.1"
-_headersmore_tag="v0.29"
-_echo_tag="v0.58"
-_upstreamfair_commit="a18b4099fbd458111983200e098b6f0c8efed4bc"
-_authpam_tag="v1.4"
-_pagespeed_version="1.11.33.0"
+_uploadprogress_tag="v0.9.2"
+_headersmore_tag="v0.32"
+_echo_commit="24923db4880644d161c39cefb073d87c9ee01a60"
+_upstreamfair_commit="6cb41999758c9299fa9d6b9a6d9fdfd8cc133dc1"
+_authpam_tag="v1.5.1"
+_pagespeed_version="1.12.34.2"
+_rtmp_version="dev"
 _davext_tag="v0.0.3"
-_naxsi_tag="0.54"
+_naxsi_tag="0.55.3"
 _substitutions_tag="v0.6.4"
-_lua_tag="v0.10.1rc1"
+_lua_commit="99efd37675ada20ab532f43629d846e136747dce"
 _brotli_commit=""
-_vts_tag="v0.1.9"
+_vts_tag="v0.1.14"
 
 pkgname=nginx-custom-dev
-pkgver=1.9.14
-pkgrel=2
+pkgver=1.12.0
+pkgrel=1
 pkgdesc="Development version of lightweight HTTP server and IMAP/POP3 proxy server with standard, additional and 3d party modules"
 arch=('i686' 'x86_64')
 
-depends=('pcre' 'zlib' 'openssl' 'pam' 'geoip' 'geoip-database' 'gd' 'libxslt' 'luajit' 'libbrotli-git')
+depends=('pcre' 'zlib' 'openssl' 'pam' 'geoip' 'geoip-database' 'gd' 'libxslt' 'luajit' 'libbrotli')
 makedepends=('libxslt' 'gd' 'git')
 
 url="http://nginx.org"
@@ -60,22 +61,23 @@ source=("nginx.sh"
     "nginx.service"
     "http://nginx.org/download/nginx-$pkgver.tar.gz"
     "ngx-fancyindex.diff"
-    "ngx-fancyindex::git+https://github.com/aperezdc/ngx-fancyindex#tag=${_fancyindex_tag}"
+    "ngx-fancyindex::git+https://github.com/aperezdc/ngx-fancyindex#commit=${_fancyindex_commit}"
     "ngx_cache_purge::git+https://github.com/FRiCKLE/ngx_cache_purge.git#tag=${_cachepurge_tag}"
     "ngx_slowfs_cache::git+https://github.com/FRiCKLE/ngx_slowfs_cache.git#tag=${_slowfscache_tag}"
     "nginx-upload-progress-module::git+https://github.com/masterzen/nginx-upload-progress-module#tag=${_uploadprogress_tag}"
-    "headers-more-nginx-module::git+https://github.com/agentzh/headers-more-nginx-module#tag=${_headersmore_tag}"
-    "echo-nginx-module::git+https://github.com/agentzh/echo-nginx-module#tag=${_echo_tag}"
-    "nginx-upstream-fair::git+https://github.com/gnosek/nginx-upstream-fair#commit=${_upstreamfair_commit}"
+    "headers-more-nginx-module::git+https://github.com/openresty/headers-more-nginx-module#tag=${_headersmore_tag}"
+    "echo-nginx-module::git+https://github.com/defanator/echo-nginx-module#commit=${_echo_commit}"
+    "nginx-upstream-fair::git+https://github.com/ximik777/nginx-upstream-fair#commit=${_upstreamfair_commit}"
     "ngx_http_auth_pam_module::git+https://github.com/stogh/ngx_http_auth_pam_module#tag=${_authpam_tag}"
     "ngx_pagespeed::git+https://github.com/pagespeed/ngx_pagespeed#tag=v${_pagespeed_version}-beta"
-    "psol.tar.gz::https://dl.google.com/dl/page-speed/psol/${_pagespeed_version}.tar.gz"
-    "nginx-rtmp-module::git+https://github.com/arut/nginx-rtmp-module#tag=${_rtmp_tag}"
+    "psol.tar.gz::https://dl.google.com/dl/page-speed/psol/${_pagespeed_version}-x64.tar.gz"
+    "nginx-rtmp-module::git+https://github.com/sergey-dryabzhinsky/nginx-rtmp-module#branch=${_rtmp_version}"
     "nginx-dav-ext-module::git+https://github.com/arut/nginx-dav-ext-module#tag=${_davext_tag}"
     "naxsi::git+https://github.com/nbs-system/naxsi#tag=${_naxsi_tag}"
     "ngx_http_substitutions_filter_module::git+https://github.com/yaoweibin/ngx_http_substitutions_filter_module#tag=${_substitutions_tag}"
-    "lua-nginx-module::git+https://github.com/chaoslawful/lua-nginx-module#tag=${_lua_tag}"
+    "lua-nginx-module::git+https://github.com/openresty/lua-nginx-module#commit=${_lua_commit}"
     "ngx_brotli::git+https://github.com/google/ngx_brotli#commit=${_brotli_commit}"
+    "brotli::git+https://github.com/google/brotli"
     "nginx-module-vts::git+https://github.com/vozlt/nginx-module-vts#tag=${_vts_tag}"
 )
 
@@ -83,8 +85,8 @@ md5sums=('d56559ed5e8cc0b1c7adbe33f2300c4c'
          '845cab784b50f1666bbf89d7435ac7af'
          '79031b58828462dec53a9faed9ddb36a'
          '6696dc228a567506bca3096b5197c9db'
-         'a25818039f34b5d54b017d44c76321c4'
-         '47adc600c72cfb59754eff3b7850a6f3'
+         '995eb0a140455cf0cfc497e5bd7f94b3'
+         '963866aa3b200fc0596465b5af3e454d'
          'SKIP'
          'SKIP'
          'SKIP'
@@ -94,7 +96,8 @@ md5sums=('d56559ed5e8cc0b1c7adbe33f2300c4c'
          'SKIP'
          'SKIP'
          'SKIP'
-         'c503b01cb92f95a5548cf86a2e7415e5'
+         '8e2f7e8502e64c1b6770cff060d96751'
+         'SKIP'
          'SKIP'
          'SKIP'
          'SKIP'
@@ -107,6 +110,11 @@ prepare() {
   if [ ! -d "$srcdir/ngx_pagespeed/psol" ]; then
     mv "$srcdir/psol" "$srcdir/ngx_pagespeed/"
   fi
+
+  cd ngx_brotli
+  git submodule init
+  git config submodule."deps/brotli".url "$srcdir/brotli"
+  git submodule update
 
   cd "$srcdir/ngx-fancyindex"
   git apply --ignore-space-change --ignore-whitespace \
