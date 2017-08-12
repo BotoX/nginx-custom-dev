@@ -20,3 +20,5 @@ lua-nginx-module/
 ngx_brotli/
 nginx-module-vts/
 brotli/
+nginx-mtask-module/
+nginx-mysql-module/
