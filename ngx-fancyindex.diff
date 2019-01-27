@@ -1,8 +1,8 @@
 diff --git a/ngx_http_fancyindex_module.c b/ngx_http_fancyindex_module.c
-index 0763845..3f57432 100644
+index 0d569fd..b9b43b8 100644
 --- a/ngx_http_fancyindex_module.c
 +++ b/ngx_http_fancyindex_module.c
-@@ -160,6 +160,8 @@ typedef struct {
+@@ -161,6 +161,8 @@ typedef struct {
      ngx_str_t  css_href;     /**< Link to a CSS stylesheet, or empty if none. */
      ngx_str_t  time_format;  /**< Format used for file timestamps. */
  
@@ -11,7 +11,7 @@ index 0763845..3f57432 100644
      ngx_array_t *ignore;     /**< List of files to ignore in listings. */
  } ngx_http_fancyindex_loc_conf_t;
  
-@@ -368,6 +370,13 @@ static ngx_command_t  ngx_http_fancyindex_commands[] = {
+@@ -376,6 +378,13 @@ static ngx_command_t  ngx_http_fancyindex_commands[] = {
        offsetof(ngx_http_fancyindex_loc_conf_t, time_format),
        NULL },
  
@@ -25,7 +25,7 @@ index 0763845..3f57432 100644
      ngx_null_command
  };
  
-@@ -638,7 +647,10 @@ make_content_buf(
+@@ -654,7 +663,10 @@ make_content_buf(
  
          len = ngx_de_namelen(&dir);
  
@@ -37,17 +37,17 @@ index 0763845..3f57432 100644
              continue;
  
          if (alcf->hide_symlinks && ngx_de_is_link (&dir))
-@@ -1315,6 +1327,7 @@ ngx_http_fancyindex_create_loc_conf(ngx_conf_t *cf)
-     conf->ignore        = NGX_CONF_UNSET_PTR;
+@@ -1332,6 +1344,7 @@ ngx_http_fancyindex_create_loc_conf(ngx_conf_t *cf)
      conf->hide_symlinks = NGX_CONF_UNSET;
      conf->show_path     = NGX_CONF_UNSET;
+     conf->hide_parent   = NGX_CONF_UNSET;
 +    conf->show_dot_files = NGX_CONF_UNSET;
  
      return conf;
  }
-@@ -1344,6 +1357,8 @@ ngx_http_fancyindex_merge_loc_conf(ngx_conf_t *cf, void *parent, void *child)
-     ngx_conf_merge_ptr_value(conf->ignore, prev->ignore, NULL);
+@@ -1362,6 +1375,8 @@ ngx_http_fancyindex_merge_loc_conf(ngx_conf_t *cf, void *parent, void *child)
      ngx_conf_merge_value(conf->hide_symlinks, prev->hide_symlinks, 0);
+     ngx_conf_merge_value(conf->hide_parent, prev->hide_parent, 0);
  
 +    ngx_conf_merge_value(conf->show_dot_files, prev->show_dot_files, 0);
 +

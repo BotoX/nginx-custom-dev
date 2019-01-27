@@ -1,0 +1,14 @@
+diff --git a/ngx_http_mysql_module.c b/ngx_http_mysql_module.c
+index a43ecb8..6c1b711 100644
+--- a/ngx_http_mysql_module.c
++++ b/ngx_http_mysql_module.c
+@@ -325,7 +325,8 @@ ngx_int_t ngx_http_mysql_handler(ngx_http_request_t *r) {
+ 			goto quit;
+ 		}
+ 
+-		sock->reconnect = 1;
++		my_bool reconnect = 1;
++		mysql_options(sock, MYSQL_OPT_RECONNECT, reconnect);
+ 
+ 		if (mnode)
+ 			mnode->ready = 1;

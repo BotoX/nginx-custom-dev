@@ -16,28 +16,28 @@ _fancyindex_commit="" # https://github.com/aperezdc/ngx-fancyindex
 _cachepurge_tag="2.3" # https://github.com/FRiCKLE/ngx_cache_purge
 _slowfscache_tag="1.10" # https://github.com/FRiCKLE/ngx_slowfs_cache
 _uploadprogress_tag="v0.9.2" # https://github.com/masterzen/nginx-upload-progress-module
-_headersmore_tag="v0.32" # https://github.com/openresty/headers-more-nginx-module
-_echo_commit="7740e11558b530b66b469c657576f5280b7cdb1b" # https://github.com/openresty/echo-nginx-module
+_headersmore_tag="v0.33" # https://github.com/openresty/headers-more-nginx-module
+_echo_tag="v0.61" # https://github.com/openresty/echo-nginx-module
 _upstreamfair_commit="6cb41999758c9299fa9d6b9a6d9fdfd8cc133dc1" # https://github.com/ximik777/nginx-upstream-fair
 _authpam_tag="v1.5.1" # https://github.com/sto/ngx_http_auth_pam_module
-_pagespeed_version="1.12.34.2" # https://github.com/pagespeed/ngx_pagespeed
+_pagespeed_version="1.13.35.2" # https://github.com/pagespeed/ngx_pagespeed
 _rtmp_branch="dev" # https://github.com/sergey-dryabzhinsky/nginx-rtmp-module
-_davext_tag="v0.0.3" # https://github.com/arut/nginx-dav-ext-module
-_naxsi_tag="0.55.3" # https://github.com/nbs-system/naxsi
+_davext_tag="v3.0.0" # https://github.com/arut/nginx-dav-ext-module
+_naxsi_tag="0.56" # https://github.com/nbs-system/naxsi
 _substitutions_tag="v0.6.4" # https://github.com/yaoweibin/ngx_http_substitutions_filter_module
-_lua_tag="v0.10.9rc8" # https://github.com/openresty/lua-nginx-module
+_lua_tag="v0.10.14rc3" # https://github.com/openresty/lua-nginx-module
 _brotli_commit="bfd2885b2da4d763fed18f49216bb935223cd34b" # https://github.com/google/ngx_brotli
-_vts_tag="v0.1.15" # https://github.com/vozlt/nginx-module-vts
+_vts_tag="v0.1.18" # https://github.com/vozlt/nginx-module-vts
 _mtask_commit="828df3c72755f10811473a5d0b049b04a153fe63" # https://github.com/arut/nginx-mtask-module
 _mysql_commit="f97cf60a1b776558f6f33fb7b1b8facf1b1f381d" # https://github.com/ideal/nginx-mysql-module
 
 pkgname=nginx-custom-dev
-pkgver=1.12.1
+pkgver=1.14.2
 pkgrel=1
 pkgdesc="Development version of lightweight HTTP server and IMAP/POP3 proxy server with standard, additional and 3d party modules"
 arch=('i686' 'x86_64')
 
-depends=('pcre' 'zlib' 'openssl-1.0' 'pam' 'geoip' 'geoip-database' 'gd' 'libxslt' 'luajit' 'brotli' 'libmariadbclient')
+depends=('pcre' 'zlib' 'openssl' 'pam' 'geoip' 'geoip-database' 'gd' 'libxslt' 'luajit' 'brotli' 'libmariadbclient')
 makedepends=('libxslt' 'gd' 'git')
 
 url="http://nginx.org"
@@ -63,15 +63,16 @@ source=("nginx.sh"
     "nginx.service"
     "http://nginx.org/download/nginx-$pkgver.tar.gz"
     "ngx-fancyindex.diff"
+    "nginx-mysql-module.diff"
     "ngx-fancyindex::git+https://github.com/aperezdc/ngx-fancyindex#commit=${_fancyindex_commit}"
     "ngx_cache_purge::git+https://github.com/FRiCKLE/ngx_cache_purge.git#tag=${_cachepurge_tag}"
     "ngx_slowfs_cache::git+https://github.com/FRiCKLE/ngx_slowfs_cache.git#tag=${_slowfscache_tag}"
     "nginx-upload-progress-module::git+https://github.com/masterzen/nginx-upload-progress-module#tag=${_uploadprogress_tag}"
     "headers-more-nginx-module::git+https://github.com/openresty/headers-more-nginx-module#tag=${_headersmore_tag}"
-    "echo-nginx-module::git+https://github.com/openresty/echo-nginx-module#tag=${_echo_commit}"
+    "echo-nginx-module::git+https://github.com/openresty/echo-nginx-module#tag=${_echo_tag}"
     "nginx-upstream-fair::git+https://github.com/ximik777/nginx-upstream-fair#commit=${_upstreamfair_commit}"
     "ngx_http_auth_pam_module::git+https://github.com/stogh/ngx_http_auth_pam_module#tag=${_authpam_tag}"
-    "ngx_pagespeed::git+https://github.com/pagespeed/ngx_pagespeed#tag=v${_pagespeed_version}-beta"
+    "ngx_pagespeed::git+https://github.com/pagespeed/ngx_pagespeed#tag=v${_pagespeed_version}-stable"
     "psol.tar.gz::https://dl.google.com/dl/page-speed/psol/${_pagespeed_version}-x64.tar.gz"
     "nginx-rtmp-module::git+https://github.com/sergey-dryabzhinsky/nginx-rtmp-module#branch=${_rtmp_branch}"
     "nginx-dav-ext-module::git+https://github.com/arut/nginx-dav-ext-module#tag=${_davext_tag}"
@@ -89,8 +90,9 @@ md5sums=('d56559ed5e8cc0b1c7adbe33f2300c4c'
          '845cab784b50f1666bbf89d7435ac7af'
          '79031b58828462dec53a9faed9ddb36a'
          '6696dc228a567506bca3096b5197c9db'
-         'a307e74aca95403e5ee00f153807ce58'
-         '963866aa3b200fc0596465b5af3e454d'
+         '239b829a13cea1d244c1044e830bd9c2'
+         '839645bb987bcffc02162b14d8eea0e2'
+         'd7bdc78a212438e553b156f6fd61f750'
          'SKIP'
          'SKIP'
          'SKIP'
@@ -100,7 +102,7 @@ md5sums=('d56559ed5e8cc0b1c7adbe33f2300c4c'
          'SKIP'
          'SKIP'
          'SKIP'
-         'e073074ce3b3e3fca978800eb894591d'
+         '40de2a0f70fd9c1a794832e6b553fce3'
          'SKIP'
          'SKIP'
          'SKIP'
@@ -125,6 +127,10 @@ prepare() {
   cd "$srcdir/ngx-fancyindex"
   git apply --ignore-space-change --ignore-whitespace \
     "$srcdir/ngx-fancyindex.diff"
+
+  cd "$srcdir/nginx-mysql-module"
+  git apply --ignore-space-change --ignore-whitespace \
+    "$srcdir/nginx-mysql-module.diff"
 }
 
 build() {
@@ -136,8 +142,6 @@ build() {
   export LUAJIT_INC=/usr/include/luajit-2.0/
 
   echo y | ./configure \
-    --with-cc-opt="-I/usr/include/openssl-1.0" \
-    --with-ld-opt="-L/usr/lib/openssl-1.0" \
     --prefix="/${_conf_path}" \
     --conf-path="/${_conf_path}/nginx.conf" \
     --sbin-path="/usr/bin/${_pkgname}" \
@@ -193,8 +197,6 @@ build() {
     --add-module="../nginx-module-vts" \
     --add-module="../nginx-mtask-module" \
     --add-module="../nginx-mysql-module"
-
-  sed -i 's|-L/usr/lib/ -L/usr/lib/openssl-1.0|-L/usr/lib/openssl-1.0 -L/usr/lib/|g' objs/Makefile
 
   make
 }
